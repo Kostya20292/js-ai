@@ -40,34 +40,62 @@ const FirstSource = {
 
 const SecondSource = ['300 USD', '150 USD', '200 USD', '400 USD'];
 
-const parseAmountString = (value) => {
-  const [amount, currency] = value.trim().split(' ');
+const AMOUNT_STRING_RE = /^(\d[\d.,]*)\s*([A-Za-z]{3})$/;
 
-  return { amount: Number(amount), currency };
+const parseAmountString = (value) => {
+  const match = String(value).trim().match(AMOUNT_STRING_RE);
+  if (!match) {
+    throw new Error(`Invalid amount string: ${value}`);
+  }
+  return {
+    amount: Number(match[1].replace(/,/g, '')),
+    currency: match[2].toUpperCase(),
+  };
+};
+
+const normalizeEntry = (amount, currency) => {
+  const numericAmount = Number(amount);
+  if (!Number.isFinite(numericAmount)) {
+    throw new Error(`Invalid amount: ${amount}`);
+  }
+  if (typeof currency !== 'string' || !currency.trim()) {
+    throw new Error(`Invalid currency: ${currency}`);
+  }
+  return { amount: numericAmount, currency: currency.trim().toUpperCase() };
 };
 
 const calculateDailyRevenue = (firstSource, secondSource) => {
-  let total = 0;
-  let currency = '';
+  if (!firstSource || !secondSource) {
+    throw new Error('Both sources are required');
+  }
+  if (!Array.isArray(firstSource.transactions)) {
+    throw new Error('firstSource.transactions must be an array');
+  }
+  if (!Array.isArray(secondSource)) {
+    throw new Error('secondSource must be an array');
+  }
 
-  firstSource.transactions.forEach((transaction) => {
-    if (transaction.type !== 'paid') {
-      return;
-    }
+  const fromFirst = firstSource.transactions
+    .filter((t) => t.type === 'paid')
+    .map((t) => normalizeEntry(t.amount, t.currency));
 
-    total += transaction.amount;
-    currency = transaction.currency;
-  });
+  const fromSecond = secondSource
+    .map(parseAmountString)
+    .map((entry) => normalizeEntry(entry.amount, entry.currency));
 
-  secondSource.forEach((value) => {
-    const { amount, currency: itemCurrency } = parseAmountString(value);
+  const all = [...fromFirst, ...fromSecond];
 
-    total += amount;
+  if (all.length === 0) {
+    return { total: 0, currency: null };
+  }
 
-    if (!currency) {
-      currency = itemCurrency;
-    }
-  });
+  const { currency } = all[0];
+  const mixed = all.find((entry) => entry.currency !== currency);
+  if (mixed) {
+    throw new Error(`Mixed currencies are not supported: ${currency} and ${mixed.currency}`);
+  }
+
+  const total = all.reduce((sum, entry) => sum + entry.amount, 0);
 
   return { total, currency };
 };
