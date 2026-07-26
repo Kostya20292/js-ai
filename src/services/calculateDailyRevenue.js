@@ -9,14 +9,22 @@ export const calculateDailyRevenue = (firstSource, secondSource) => {
     throw new Error('secondSource must be an array')
   }
 
-  const fromFirst = firstSource.transactions
-    .filter((transaction) => transaction.type === 'paid')
-    .map((transaction) => normalizeEntry(transaction.amount, transaction.currency))
+  const totals = {}
 
-  const fromSecond = secondSource.map(parseAmountString)
+  const add = ({ amount, currency }) => {
+    totals[currency] = totals[currency]?.plus(amount) ?? amount
+  }
 
-  return [...fromFirst, ...fromSecond].reduce((totals, { amount, currency }) => {
-    totals[currency] = roundAmount((totals[currency] ?? 0) + amount)
-    return totals
-  }, {})
+  for (const transaction of firstSource.transactions) {
+    if (transaction.type !== 'paid') continue
+    add(normalizeEntry(transaction.amount, transaction.currency))
+  }
+
+  for (const value of secondSource) {
+    add(parseAmountString(value))
+  }
+
+  return Object.fromEntries(
+    Object.entries(totals).map(([currency, amount]) => [currency, roundAmount(amount)]),
+  )
 }

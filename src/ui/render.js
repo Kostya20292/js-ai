@@ -1,4 +1,10 @@
-import { BASE_CURRENCY } from '../config/constants.js'
+import { convertToBaseCurrency } from '../api/exchangeRates.js'
+import {
+  BASE_CURRENCY,
+  CURRENCY_SCALE,
+  RATE_MAX_FRACTION_DIGITS,
+  RATE_MIN_FRACTION_DIGITS,
+} from '../config/constants.js'
 
 const app = document.querySelector('#app')
 
@@ -6,13 +12,13 @@ const formatMoney = (amount, currency) =>
   new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency,
-    maximumFractionDigits: 2,
+    maximumFractionDigits: CURRENCY_SCALE,
   }).format(amount)
 
 const formatRate = (rate) =>
   new Intl.NumberFormat('ru-RU', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 4,
+    minimumFractionDigits: RATE_MIN_FRACTION_DIGITS,
+    maximumFractionDigits: RATE_MAX_FRACTION_DIGITS,
   }).format(rate)
 
 const createCurrencyCards = (totalsByCurrency, rates) =>
@@ -22,7 +28,10 @@ const createCurrencyCards = (totalsByCurrency, rates) =>
         <li class="currency-card">
           <span class="currency-code">${currency}</span>
           <strong>${formatMoney(amount, currency)}</strong>
-          <span>В базовой валюте: ${formatMoney(amount / rates[currency], BASE_CURRENCY)}</span>
+          <span>В базовой валюте: ${formatMoney(
+            convertToBaseCurrency(amount, currency, rates),
+            BASE_CURRENCY,
+          )}</span>
         </li>
       `,
     )

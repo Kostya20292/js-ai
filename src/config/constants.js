@@ -9,3 +9,11 @@ export const EXCHANGE_RATES_API_KEY = import.meta.env.VITE_EXCHANGE_RATES_API_KE
 export const exchangeRatesSource = `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=${EXCHANGE_RATES_API_KEY}`
 
 export const BASE_CURRENCY = 'USD'
+
+export const BASE_CURRENCY_RATE = '1'
+
+export const CURRENCY_SCALE = 2
+
+export const RATE_MIN_FRACTION_DIGITS = 2
+
+export const RATE_MAX_FRACTION_DIGITS = 4

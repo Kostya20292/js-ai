@@ -1,19 +1,36 @@
-import { AMOUNT_STRING_RE } from '../config/constants.js'
+import Decimal from 'decimal.js'
 
-export const roundAmount = (value) => Number(value.toFixed(2))
+import { AMOUNT_STRING_RE, CURRENCY_SCALE } from '../config/constants.js'
+
+export const parseDecimal = (value, errorMessage) => {
+  let decimalValue
+
+  try {
+    decimalValue = new Decimal(value)
+  } catch {
+    throw new Error(errorMessage)
+  }
+
+  if (!decimalValue.isFinite()) {
+    throw new Error(errorMessage)
+  }
+
+  return decimalValue
+}
+
+export const roundAmount = (value) =>
+  parseDecimal(value, `Invalid amount: ${value}`)
+    .toDecimalPlaces(CURRENCY_SCALE, Decimal.ROUND_HALF_UP)
+    .toFixed(CURRENCY_SCALE)
 
 export const normalizeEntry = (amount, currency) => {
-  const numericAmount = Number(amount)
-
-  if (!Number.isFinite(numericAmount)) {
-    throw new Error(`Invalid amount: ${amount}`)
-  }
+  const decimalAmount = parseDecimal(amount, `Invalid amount: ${amount}`)
 
   if (typeof currency !== 'string' || !currency.trim()) {
     throw new Error(`Invalid currency: ${currency}`)
   }
 
-  return { amount: numericAmount, currency: currency.trim().toUpperCase() }
+  return { amount: decimalAmount, currency: currency.trim().toUpperCase() }
 }
 
 export const parseAmountString = (value) => {

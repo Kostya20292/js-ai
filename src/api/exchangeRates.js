@@ -1,15 +1,19 @@
-import { BASE_CURRENCY, exchangeRatesSource } from '../config/constants.js'
-import { roundAmount } from '../utils/amount.js'
+import {
+  BASE_CURRENCY,
+  BASE_CURRENCY_RATE,
+  exchangeRatesSource,
+} from '../config/constants.js'
+import { parseDecimal, roundAmount } from '../utils/amount.js'
 import { fetchData } from './fetchData.js'
 
 const parseRate = (currency, value) => {
-  const rate = Number(value)
+  const rate = parseDecimal(value, `Invalid exchange rate for ${currency}: ${value}`)
 
-  if (!Number.isFinite(rate) || rate <= 0) {
+  if (!rate.isPositive()) {
     throw new Error(`Invalid exchange rate for ${currency}: ${value}`)
   }
 
-  return rate
+  return rate.toString()
 }
 
 export const fetchExchangeRates = async () => {
@@ -28,7 +32,7 @@ export const fetchExchangeRates = async () => {
       rates[currency.toUpperCase()] = parseRate(currency, value)
       return rates
     },
-    { [BASE_CURRENCY]: 1 },
+    { [BASE_CURRENCY]: BASE_CURRENCY_RATE },
   )
 }
 
@@ -39,13 +43,19 @@ export const convertToBaseCurrency = (amount, currency, rates) => {
     throw new Error(`No exchange rate for ${currency} to ${BASE_CURRENCY}`)
   }
 
-  return amount / rate
+  const decimalRate = parseDecimal(rate, `Invalid exchange rate for ${currency}: ${rate}`)
+
+  if (!decimalRate.isPositive()) {
+    throw new Error(`Invalid exchange rate for ${currency}: ${rate}`)
+  }
+
+  return parseDecimal(amount, `Invalid amount: ${amount}`).dividedBy(decimalRate).toString()
 }
 
 export const sumInBaseCurrency = (totalsByCurrency, rates) => {
   const total = Object.entries(totalsByCurrency).reduce(
-    (sum, [currency, amount]) => sum + convertToBaseCurrency(amount, currency, rates),
-    0,
+    (sum, [currency, amount]) => sum.plus(convertToBaseCurrency(amount, currency, rates)),
+    parseDecimal(0, 'Invalid initial total'),
   )
 
   return roundAmount(total)
