@@ -1,21 +1,33 @@
-import './style.css';
+import './style.css'
 
-import { calculateDailyRevenue } from './calculateDailyRevenue.js';
-import { BASE_CURRENCY, firstSource, secondSource } from './constants.js';
-import { fetchExchangeRates, sumInBaseCurrency } from './exchangeRates.js';
-import { fetchData } from './fetchData.js';
+import { fetchExchangeRates, sumInBaseCurrency } from './api/exchangeRates.js'
+import { fetchData } from './api/fetchData.js'
+import { firstSource, secondSource } from './config/constants.js'
+import { calculateDailyRevenue } from './services/calculateDailyRevenue.js'
+import { renderError, renderLoading, renderReport } from './ui/render.js'
 
-const firstSourceData = await fetchData(firstSource);
-const secondSourceData = await fetchData(secondSource);
-const ratesRequest = fetchExchangeRates();
-const rates = await ratesRequest;
+const handleLoadReport = async () => {
+  renderLoading()
 
-const totalsByCurrency = calculateDailyRevenue(firstSourceData, secondSourceData);
-const total = sumInBaseCurrency(totalsByCurrency, rates);
+  try {
+    const [firstSourceData, secondSourceData, rates] = await Promise.all([
+      fetchData(firstSource),
+      fetchData(secondSource),
+      fetchExchangeRates(),
+    ])
+    const totalsByCurrency = calculateDailyRevenue(firstSourceData, secondSourceData)
+    const total = sumInBaseCurrency(totalsByCurrency, rates)
 
-console.log('Totals by currency:', totalsByCurrency);
-console.log(
-  'Rates used:',
-  Object.fromEntries(Object.keys(totalsByCurrency).map((currency) => [currency, rates[currency]])),
-);
-console.log(`Total: ${total} ${BASE_CURRENCY}`);
+    renderReport({
+      totalsByCurrency,
+      rates,
+      total,
+      handleRefresh: handleLoadReport,
+    })
+  } catch (error) {
+    console.error(error)
+    renderError(handleLoadReport)
+  }
+}
+
+handleLoadReport()
