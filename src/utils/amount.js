@@ -1,27 +1,12 @@
 import Decimal from 'decimal.js'
 
 import { AMOUNT_STRING_RE, CURRENCY_SCALE } from '../config/constants.js'
+import { parseDecimal } from './decimal.js'
 
-export const parseDecimal = (value, errorMessage) => {
-  let decimalValue
-
-  try {
-    decimalValue = new Decimal(value)
-  } catch {
-    throw new Error(errorMessage)
-  }
-
-  if (!decimalValue.isFinite()) {
-    throw new Error(errorMessage)
-  }
-
-  return decimalValue
-}
+export { parseDecimal }
 
 export const roundAmount = (value) =>
-  parseDecimal(value, `Invalid amount: ${value}`)
-    .toDecimalPlaces(CURRENCY_SCALE, Decimal.ROUND_HALF_UP)
-    .toFixed(CURRENCY_SCALE)
+  parseDecimal(value, `Invalid amount: ${value}`).toFixed(CURRENCY_SCALE, Decimal.ROUND_HALF_UP)
 
 export const normalizeEntry = (amount, currency) => {
   const decimalAmount = parseDecimal(amount, `Invalid amount: ${amount}`)
