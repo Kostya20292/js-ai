@@ -1,0 +1,21 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.section {
+  margin-top: 56px;
+
+  @include mobile {
+    margin-top: 36px;
+  }
+}
+
+.heading {
+  @include row;
+
+  margin-bottom: 20px;
+}
+
+.note {
+  color: $color-muted;
+  font-size: 0.875rem;
+}

@@ -1,0 +1,28 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  border: 1px solid $color-border;
+  border-radius: 20px;
+  background: $color-surface;
+}
+
+.code {
+  @include eyebrow;
+}
+
+.amount {
+  overflow-wrap: anywhere;
+  font-size: 1.6rem;
+  letter-spacing: -0.04em;
+}
+
+.converted {
+  color: $color-muted;
+  font-size: 0.825rem;
+}

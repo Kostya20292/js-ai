@@ -1,0 +1,16 @@
+@use 'mixins' as *;
+
+.header {
+  @include row;
+
+  margin-bottom: 36px;
+
+  @include mobile {
+    align-items: flex-end;
+    margin-bottom: 24px;
+  }
+}
+
+.eyebrow {
+  @include eyebrow;
+}

@@ -1,0 +1,31 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 20px;
+  color: $color-surface;
+  background: $color-accent-dark;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+
+  &:hover {
+    background: $color-accent;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid $color-focus;
+    outline-offset: 3px;
+  }
+}
+
+.compact {
+  @include mobile {
+    padding: 10px 14px;
+  }
+}

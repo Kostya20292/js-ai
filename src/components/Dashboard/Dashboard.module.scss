@@ -1,0 +1,12 @@
+@use 'mixins' as *;
+
+.dashboard {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 64px 0;
+
+  @include mobile {
+    width: min(100% - 24px, 1120px);
+    padding: 32px 0;
+  }
+}

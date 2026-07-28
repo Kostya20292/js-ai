@@ -1,0 +1,18 @@
+@use 'variables' as *;
+
+.loader {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border: 5px solid #d7e5db;
+  border-top-color: $color-accent;
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

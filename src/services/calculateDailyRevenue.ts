@@ -1,7 +1,12 @@
-import { normalizeEntry, parseAmountString } from '../utils/amount.js'
+import type { MoneyEntry, TotalsByCurrency } from '../types'
+import { normalizeEntry, parseAmountString } from '../utils/amount'
+import { isRecord } from '../utils/guards'
 
-export const calculateDailyRevenue = (firstSource, secondSource) => {
-  if (!firstSource || !Array.isArray(firstSource.transactions)) {
+export const calculateDailyRevenue = (
+  firstSource: unknown,
+  secondSource: unknown,
+): TotalsByCurrency => {
+  if (!isRecord(firstSource) || !Array.isArray(firstSource.transactions)) {
     throw new Error('firstSource.transactions must be an array')
   }
 
@@ -9,9 +14,9 @@ export const calculateDailyRevenue = (firstSource, secondSource) => {
     throw new Error('secondSource must be an array')
   }
 
-  const totals = {}
+  const totals: TotalsByCurrency = {}
 
-  const add = ({ amount, currency }) => {
+  const add = ({ amount, currency }: MoneyEntry) => {
     const total = (totals[currency] ?? 0) + amount
 
     if (!Number.isSafeInteger(total)) {
@@ -22,7 +27,7 @@ export const calculateDailyRevenue = (firstSource, secondSource) => {
   }
 
   for (const transaction of firstSource.transactions) {
-    if (transaction.type !== 'paid') continue
+    if (!isRecord(transaction) || transaction.type !== 'paid') continue
     add(normalizeEntry(transaction.amount, transaction.currency))
   }
 

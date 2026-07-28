@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+.icon {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 50%;
+  color: $color-surface;
+  background: $color-danger;
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.retryButton {
+  margin-top: 28px;
+}
