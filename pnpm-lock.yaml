@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      decimal.js:
-        specifier: ^10.6.0
-        version: 10.6.0
     devDependencies:
       vite:
         specifier: ^8.1.1
@@ -136,9 +132,6 @@ packages:
 
   '@tybys/wasm-util@0.10.3':
     resolution: {integrity: sha512-F3fo1MYrRJYL3zER0OUOmkutjr1Vp23m7OsSgp7nq4SP6OqX6C/56XFIPAl5bt3zaBRjmW7SGz3u/6LwFpYcOg==}
-
-  decimal.js@10.6.0:
-    resolution: {integrity: sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg==}
 
   detect-libc@2.1.2:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
@@ -389,8 +382,6 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
-
-  decimal.js@10.6.0: {}
 
   detect-libc@2.1.2: {}
 

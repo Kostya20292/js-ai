@@ -5,6 +5,7 @@ import {
   RATE_MAX_FRACTION_DIGITS,
   RATE_MIN_FRACTION_DIGITS,
 } from '../config/constants.js'
+import { fromMinorUnits } from '../utils/amount.js'
 
 const app = document.querySelector('#app')
 
@@ -13,7 +14,7 @@ const formatMoney = (amount, currency) =>
     style: 'currency',
     currency,
     maximumFractionDigits: CURRENCY_SCALE,
-  }).format(amount)
+  }).format(fromMinorUnits(amount))
 
 const formatRate = (rate) =>
   new Intl.NumberFormat('ru-RU', {

@@ -1,4 +1,4 @@
-import { normalizeEntry, parseAmountString, roundAmount } from '../utils/amount.js'
+import { normalizeEntry, parseAmountString } from '../utils/amount.js'
 
 export const calculateDailyRevenue = (firstSource, secondSource) => {
   if (!firstSource || !Array.isArray(firstSource.transactions)) {
@@ -12,7 +12,13 @@ export const calculateDailyRevenue = (firstSource, secondSource) => {
   const totals = {}
 
   const add = ({ amount, currency }) => {
-    totals[currency] = totals[currency]?.plus(amount) ?? amount
+    const total = (totals[currency] ?? 0) + amount
+
+    if (!Number.isSafeInteger(total)) {
+      throw new Error(`Total for ${currency} exceeds the safe integer range`)
+    }
+
+    totals[currency] = total
   }
 
   for (const transaction of firstSource.transactions) {
@@ -24,7 +30,5 @@ export const calculateDailyRevenue = (firstSource, secondSource) => {
     add(parseAmountString(value))
   }
 
-  return Object.fromEntries(
-    Object.entries(totals).map(([currency, amount]) => [currency, roundAmount(amount)]),
-  )
+  return totals
 }
