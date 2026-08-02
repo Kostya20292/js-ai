@@ -1,14 +1,19 @@
-import { Button } from '../Button/Button'
-import { Dashboard } from '../Dashboard/Dashboard'
-import { StatusCard } from '../StatusCard/StatusCard'
-import styles from './ErrorState.module.scss'
+import type { AppRoute } from '../../types';
+import { AppNav } from '../AppNav/AppNav';
+import { Button } from '../Button/Button';
+import { Dashboard } from '../Dashboard/Dashboard';
+import { StatusCard } from '../StatusCard/StatusCard';
+import styles from './ErrorState.module.scss';
 
 type ErrorStateProps = {
-  handleRetry: () => void
-}
+  currentRoute: AppRoute;
+  handleNavigate: (route: AppRoute) => void;
+  handleRetry: () => void;
+};
 
-export const ErrorState = ({ handleRetry }: ErrorStateProps) => (
+export const ErrorState = ({ currentRoute, handleNavigate, handleRetry }: ErrorStateProps) => (
   <Dashboard>
+    <AppNav currentRoute={currentRoute} handleNavigate={handleNavigate} />
     <StatusCard
       role="alert"
       icon={
@@ -25,4 +30,4 @@ export const ErrorState = ({ handleRetry }: ErrorStateProps) => (
       </Button>
     </StatusCard>
   </Dashboard>
-)
+);

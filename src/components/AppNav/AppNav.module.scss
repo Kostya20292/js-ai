@@ -1,0 +1,57 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.nav {
+  margin-bottom: 28px;
+
+  @include mobile {
+    margin-bottom: 20px;
+  }
+}
+
+.list {
+  @include reset-list;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border: 1px solid $color-border;
+  border-radius: 999px;
+  color: $color-text;
+  background: $color-surface;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+
+  &:hover {
+    border-color: $color-accent-soft;
+    background: #eef5f0;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $color-focus;
+    outline-offset: 3px;
+  }
+}
+
+.current {
+  border-color: $color-accent-dark;
+  color: $color-surface;
+  background: $color-accent-dark;
+
+  &:hover {
+    border-color: $color-accent;
+    background: $color-accent;
+  }
+}

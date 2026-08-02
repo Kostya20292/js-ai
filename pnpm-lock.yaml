@@ -66,6 +66,9 @@ importers:
       typescript-eslint:
         specifier: ^8.62.0
         version: 8.65.0(eslint@10.8.0)(typescript@6.0.3)
+      unpdf:
+        specifier: ^1.8.0
+        version: 1.8.0
       vite:
         specifier: ^8.1.1
         version: 8.1.5(@types/node@24.13.3)(sass-embedded@1.100.0)(sass@1.100.0)
@@ -1145,6 +1148,15 @@ packages:
   undici-types@7.18.2:
     resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
+  unpdf@1.8.0:
+    resolution: {integrity: sha512-jQlkckbe5nKxRHQdbvo9IKHlU6Cjq00UlxxB8lrCIxvS2o5IbAL1wM+4a1Yc3+BIohg9p5AsoaftwO+G4Aq/qQ==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      '@napi-rs/canvas': ^0.1.69 || ^1.0.0
+    peerDependenciesMeta:
+      '@napi-rs/canvas':
+        optional: true
+
   update-browserslist-db@1.2.3:
     resolution: {integrity: sha512-Js0m9cx+qOgDxo0eMiFGEueWztz+d4+M3rGlmKPT+T4IS/jP4ylw3Nwpu6cpTTP8R1MAC1kF4VbdLt3ARf209w==}
     hasBin: true
@@ -2202,6 +2214,8 @@ snapshots:
   typescript@6.0.3: {}
 
   undici-types@7.18.2: {}
+
+  unpdf@1.8.0: {}
 
   update-browserslist-db@1.2.3(browserslist@4.28.7):
     dependencies:

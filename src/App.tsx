@@ -1,18 +1,52 @@
-import { ErrorState } from './components/ErrorState/ErrorState'
-import { LoadingState } from './components/LoadingState/LoadingState'
-import { Report } from './components/Report/Report'
-import { useDailyRevenue } from './hooks/useDailyRevenue'
+import { useEffect, useState } from 'react';
+import { DataSources } from './components/DataSources/DataSources';
+import { ErrorState } from './components/ErrorState/ErrorState';
+import { LoadingState } from './components/LoadingState/LoadingState';
+import { Report } from './components/Report/Report';
+import { useDailyRevenue } from './hooks/useDailyRevenue';
+import type { AppRoute } from './types';
+
+const ROUTE_TITLES: Record<AppRoute, string> = {
+  report: 'Дневная выручка',
+  sources: 'Источники данных | Дневная выручка',
+};
 
 export const App = () => {
-  const { state, handleReload } = useDailyRevenue()
+  const [route, setRoute] = useState<AppRoute>('report');
+  const { state, handleReload } = useDailyRevenue();
+
+  useEffect(() => {
+    document.title = ROUTE_TITLES[route];
+  }, [route]);
+
+  const handleNavigate = (nextRoute: AppRoute) => {
+    setRoute(nextRoute);
+  };
+
+  if (route === 'sources') {
+    return <DataSources currentRoute={route} handleNavigate={handleNavigate} />;
+  }
 
   return (
     <>
-      {state.status === 'loading' && <LoadingState />}
-      {state.status === 'error' && <ErrorState handleRetry={handleReload} />}
+      {state.status === 'loading' && (
+        <LoadingState currentRoute={route} handleNavigate={handleNavigate} />
+      )}
+      {state.status === 'error' && (
+        <ErrorState
+          currentRoute={route}
+          handleNavigate={handleNavigate}
+          handleRetry={handleReload}
+        />
+      )}
       {state.status === 'success' && (
-        <Report report={state.report} handleRefresh={handleReload} />
+        <Report
+          currentRoute={route}
+          handleNavigate={handleNavigate}
+          report={state.report}
+          handleRefresh={handleReload}
+        />
       )}
     </>
-  )
-}
+  );
+};

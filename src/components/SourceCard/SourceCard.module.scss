@@ -1,0 +1,189 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  border: 1px solid $color-border;
+  border-radius: 20px;
+  background: $color-surface;
+}
+
+.card:has(.issues) {
+  border-color: #e2c98a;
+  background: linear-gradient(180deg, #fffdf8 0%, $color-surface 48%);
+}
+
+.top {
+  @include row;
+
+  align-items: flex-start;
+  gap: 16px;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.role {
+  @include eyebrow;
+}
+
+.title {
+  margin-top: 8px;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.statusMark {
+  display: inline-grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.statusOk {
+  color: $color-accent-dark;
+  background: #e5f2ea;
+
+  .statusMark {
+    color: $color-surface;
+    background: $color-accent;
+  }
+}
+
+.statusWarn {
+  color: $color-warning;
+  background: $color-warning-soft;
+
+  .statusMark {
+    color: $color-surface;
+    background: $color-warning;
+  }
+}
+
+.meta {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+
+  dt {
+    margin-bottom: 4px;
+    color: $color-muted;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.45;
+  }
+}
+
+.url {
+  color: $color-accent-dark;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+
+  &:focus-visible {
+    outline: 3px solid $color-focus;
+    outline-offset: 3px;
+  }
+}
+
+.issues {
+  padding-top: 4px;
+  border-top: 1px solid $color-divider;
+}
+
+.issuesTitle {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.issuesList {
+  @include reset-list;
+
+  display: grid;
+  gap: 12px;
+}
+
+.issue {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #f7f8f6;
+}
+
+.issueHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.severity {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.severityMinor {
+  color: $color-warning;
+  background: $color-warning-soft;
+}
+
+.severityInfo {
+  color: $color-info;
+  background: $color-info-soft;
+}
+
+.severityDanger {
+  color: $color-danger;
+  background: #f6dede;
+}
+
+.issueCode {
+  align-self: center;
+  color: $color-muted;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+}
+
+.issueTitle {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.issueDetail {
+  color: $color-muted;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}

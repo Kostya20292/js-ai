@@ -1,10 +1,11 @@
-import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'vite'
-import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
+import { defineConfig } from 'vite';
+import react, { reactCompilerPreset } from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel';
+import { fileURLToPath } from 'node:url';
+import { auditSourcesPlugin } from './vite-plugin-audit-sources.ts';
 
 export default defineConfig({
-  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+  plugins: [react(), babel({ presets: [reactCompilerPreset()] }), auditSourcesPlugin()],
   css: {
     preprocessorOptions: {
       scss: {
@@ -12,4 +13,4 @@ export default defineConfig({
       },
     },
   },
-})
+});

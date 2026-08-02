@@ -2,6 +2,52 @@
 
 Журнал выполненных задач. Новые записи — сверху.
 
+## 2026-08-02 — источники из PDF аудита
+
+### Кратко
+
+- хардкод `dataSources.ts` удалён
+- Vite-плагин читает последний `docs/api-audit/*-finance-api-audit.pdf`
+- нет PDF — экран источников без списка; есть PDF — карточки и замечания из отчёта
+
+### Детали
+
+- `vite-plugin-audit-sources.ts`, `audit-sources/parseAuditReport.ts`, `virtual:audit-sources`
+- зависимость `unpdf` для извлечения текста
+- обновлены `DataSources`, `docs/architecture.md`
+
+## 2026-08-02 — экраны без смены URL
+
+### Кратко
+
+- hash-роутинг убран (`useAppRoute` удалён)
+- активный экран хранится в `useState` внутри `App`
+- `AppNav` переключает экраны через `button` + `handleNavigate`
+
+### Детали
+
+- обновлены `App`, `AppNav`, `Report`, `DataSources`, loading/error
+- `docs/architecture.md` — экраны без URL
+
+## 2026-08-02 — страница источников данных
+
+### Кратко
+
+- добавлен экран источников данных со списком ресурсов расчёта
+- на карточках отмечены потенциальные проблемы по аудиту API
+- навигация `AppNav` на отчёте, загрузке, ошибке и источниках
+- переключение экранов через локальный state (без смены URL)
+
+### Детали
+
+- `src/config/dataSources.ts`, `SourceCard`, `DataSources`, `AppNav`
+- замечания: finance2 (`CURRENCY_CASE`), CurrencyFreaks (info `INVALID_CURRENCY`)
+- обновлён `docs/architecture.md`
+
+### Следующие шаги
+
+- при желании подтянуть замечания с живого аудита вместо статического списка
+
 ## 2026-08-02 — аудит API: только PDF
 
 ### Кратко
