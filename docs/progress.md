@@ -2,6 +2,38 @@
 
 Журнал выполненных задач. Новые записи — сверху.
 
+## 2026-08-02 — Prettier (Airbnb-стиль)
+
+### Кратко
+
+- добавлены `prettier` и `eslint-config-prettier`
+- конфиг совпадает с настройками Prettier в Cursor (singleQuote, printWidth 100, trailingComma all и др.)
+- скрипты `format` / `format:check`; `build` сначала запускает форматирование
+- весь код прогнан через Prettier
+
+### Детали
+
+- `.prettierrc.json`, `.prettierignore`
+- `eslint.config.js` — `eslint-config-prettier/flat` в конце
+- `package.json` — скрипты и devDependencies
+
+## 2026-08-02 — path aliases по слоям
+
+### Кратко
+
+- добавлены алиасы `@api`, `@config`, `@services`, `@hooks`, `@components`, `@utils`, `@types`
+- все кросс-слойные импорты в `src` переведены на алиасы
+- внутри одной папки оставлены относительные `./`
+
+### Детали
+
+- `tsconfig.app.json` (`paths` без deprecated `baseUrl`), `vite.config.ts` (`resolve.alias`)
+- обновлены импорты в слоях и компонентах; `docs/architecture.md` — соглашение по алиасам
+
+### Следующие шаги
+
+- при желании настроить ESLint `import/order` под алиасы
+
 ## 2026-08-02 — источники из PDF аудита
 
 ### Кратко

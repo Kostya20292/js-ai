@@ -39,4 +39,5 @@
 - Новый UI — папка `ComponentName/` с `ComponentName.tsx` + `ComponentName.module.scss`.
 - Константы и ключи — только в `src/config/constants.ts`.
 - Секреты только в `.env` (`VITE_*`), файл `.env` не коммитить.
+- Импорты между слоями — через алиасы: `@api`, `@config`, `@services`, `@hooks`, `@components`, `@utils`, `@types`. Внутри одной папки — относительные `./`.
 - Источник правды по проекту — `docs/`; в `.cursor/rules/` только короткие правила со ссылками сюда.

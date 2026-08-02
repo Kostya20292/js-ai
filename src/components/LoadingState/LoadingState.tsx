@@ -1,7 +1,7 @@
-import type { AppRoute } from '../../types';
-import { AppNav } from '../AppNav/AppNav';
-import { Dashboard } from '../Dashboard/Dashboard';
-import { StatusCard } from '../StatusCard/StatusCard';
+import type { AppRoute } from '@types';
+import { AppNav } from '@components/AppNav/AppNav';
+import { Dashboard } from '@components/Dashboard/Dashboard';
+import { StatusCard } from '@components/StatusCard/StatusCard';
 import styles from './LoadingState.module.scss';
 
 type LoadingStateProps = {

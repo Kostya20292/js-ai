@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { AppRoute } from '../../types';
+import type { AppRoute } from '@types';
 import styles from './AppNav.module.scss';
 
 type AppNavProps = {

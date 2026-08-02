@@ -1,9 +1,9 @@
 import { auditSourcesReport } from 'virtual:audit-sources';
-import type { AppRoute } from '../../types';
-import { AppNav } from '../AppNav/AppNav';
-import { Dashboard } from '../Dashboard/Dashboard';
-import { ReportSection } from '../ReportSection/ReportSection';
-import { SourceCard } from '../SourceCard/SourceCard';
+import type { AppRoute } from '@types';
+import { AppNav } from '@components/AppNav/AppNav';
+import { Dashboard } from '@components/Dashboard/Dashboard';
+import { ReportSection } from '@components/ReportSection/ReportSection';
+import { SourceCard } from '@components/SourceCard/SourceCard';
 import styles from './DataSources.module.scss';
 
 type DataSourcesProps = {

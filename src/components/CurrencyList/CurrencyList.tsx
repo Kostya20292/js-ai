@@ -1,11 +1,11 @@
-import type { Rates, TotalsByCurrency } from '../../types'
-import { CurrencyCard } from '../CurrencyCard/CurrencyCard'
-import styles from './CurrencyList.module.scss'
+import type { Rates, TotalsByCurrency } from '@types';
+import { CurrencyCard } from '@components/CurrencyCard/CurrencyCard';
+import styles from './CurrencyList.module.scss';
 
 type CurrencyListProps = {
-  totalsByCurrency: TotalsByCurrency
-  rates: Rates
-}
+  totalsByCurrency: TotalsByCurrency;
+  rates: Rates;
+};
 
 export const CurrencyList = ({ totalsByCurrency, rates }: CurrencyListProps) => (
   <ul className={styles.grid}>
@@ -13,4 +13,4 @@ export const CurrencyList = ({ totalsByCurrency, rates }: CurrencyListProps) => 
       <CurrencyCard key={currency} currency={currency} amount={amount} rates={rates} />
     ))}
   </ul>
-)
+);

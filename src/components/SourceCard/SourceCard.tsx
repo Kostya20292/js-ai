@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useId } from 'react';
-import type { DataSource, IssueSeverity } from '../../types';
+import type { DataSource, IssueSeverity } from '@types';
 import styles from './SourceCard.module.scss';
 
 type SourceCardProps = {

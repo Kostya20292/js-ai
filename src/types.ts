@@ -21,9 +21,7 @@ export type Report = {
 };
 
 export type ReportState =
-  | { status: 'loading' }
-  | { status: 'error' }
-  | { status: 'success'; report: Report };
+  { status: 'loading' } | { status: 'error' } | { status: 'success'; report: Report };
 
 export type AppRoute = 'report' | 'sources';
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { DataSources } from './components/DataSources/DataSources';
-import { ErrorState } from './components/ErrorState/ErrorState';
-import { LoadingState } from './components/LoadingState/LoadingState';
-import { Report } from './components/Report/Report';
-import { useDailyRevenue } from './hooks/useDailyRevenue';
-import type { AppRoute } from './types';
+import { DataSources } from '@components/DataSources/DataSources';
+import { ErrorState } from '@components/ErrorState/ErrorState';
+import { LoadingState } from '@components/LoadingState/LoadingState';
+import { Report } from '@components/Report/Report';
+import { useDailyRevenue } from '@hooks/useDailyRevenue';
+import type { AppRoute } from '@types';
 
 const ROUTE_TITLES: Record<AppRoute, string> = {
   report: 'Дневная выручка',

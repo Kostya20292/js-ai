@@ -1,14 +1,14 @@
-import { convertToBaseCurrency } from '../../api/exchangeRates'
-import { BASE_CURRENCY } from '../../config/constants'
-import type { CurrencyCode, Rates } from '../../types'
-import { formatMoney } from '../../utils/format'
-import styles from './CurrencyCard.module.scss'
+import { convertToBaseCurrency } from '@api/exchangeRates';
+import { BASE_CURRENCY } from '@config/constants';
+import type { CurrencyCode, Rates } from '@types';
+import { formatMoney } from '@utils/format';
+import styles from './CurrencyCard.module.scss';
 
 type CurrencyCardProps = {
-  currency: CurrencyCode
-  amount: number
-  rates: Rates
-}
+  currency: CurrencyCode;
+  amount: number;
+  rates: Rates;
+};
 
 export const CurrencyCard = ({ currency, amount, rates }: CurrencyCardProps) => (
   <li className={styles.card}>
@@ -18,4 +18,4 @@ export const CurrencyCard = ({ currency, amount, rates }: CurrencyCardProps) => 
       В базовой валюте: {formatMoney(convertToBaseCurrency(amount, currency, rates), BASE_CURRENCY)}
     </span>
   </li>
-)
+);

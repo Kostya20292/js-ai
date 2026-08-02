@@ -79,7 +79,7 @@ const loadReportModule = async (root: string): Promise<string> => {
   const auditDate = parseAuditDateFromFileName(pdfFileName);
   const pdfPath = path.join(auditDir, pdfFileName);
   const bytes = new Uint8Array(await readFile(pdfPath));
-  const pdf = await getDocumentProxy(bytes);
+  const pdf = await getDocumentProxy(bytes, { verbosity: 0 });
   const { text } = await extractText(pdf, { mergePages: true });
   const parsedIssues: ParsedAuditIssue[] = parseAuditIssuesFromText(text);
   const catalog = buildSourceCatalog();

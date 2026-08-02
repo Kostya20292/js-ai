@@ -1,11 +1,11 @@
-import type { AppRoute, Report as ReportData } from '../../types';
-import { AppNav } from '../AppNav/AppNav';
-import { CurrencyList } from '../CurrencyList/CurrencyList';
-import { Dashboard } from '../Dashboard/Dashboard';
-import { PageHeader } from '../PageHeader/PageHeader';
-import { RatesSection } from '../RatesSection/RatesSection';
-import { ReportSection } from '../ReportSection/ReportSection';
-import { TotalCard } from '../TotalCard/TotalCard';
+import type { AppRoute, Report as ReportData } from '@types';
+import { AppNav } from '@components/AppNav/AppNav';
+import { CurrencyList } from '@components/CurrencyList/CurrencyList';
+import { Dashboard } from '@components/Dashboard/Dashboard';
+import { PageHeader } from '@components/PageHeader/PageHeader';
+import { RatesSection } from '@components/RatesSection/RatesSection';
+import { ReportSection } from '@components/ReportSection/ReportSection';
+import { TotalCard } from '@components/TotalCard/TotalCard';
 
 type ReportProps = {
   currentRoute: AppRoute;

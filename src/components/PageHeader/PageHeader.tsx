@@ -1,9 +1,9 @@
-import { Button } from '../Button/Button'
-import styles from './PageHeader.module.scss'
+import { Button } from '@components/Button/Button';
+import styles from './PageHeader.module.scss';
 
 type PageHeaderProps = {
-  handleRefresh: () => void
-}
+  handleRefresh: () => void;
+};
 
 export const PageHeader = ({ handleRefresh }: PageHeaderProps) => (
   <header className={styles.header}>
@@ -15,4 +15,4 @@ export const PageHeader = ({ handleRefresh }: PageHeaderProps) => (
       Обновить
     </Button>
   </header>
-)
+);

@@ -1,16 +1,16 @@
-import clsx from 'clsx'
-import { useId, type ReactNode } from 'react'
-import styles from './ReportSection.module.scss'
+import clsx from 'clsx';
+import { useId, type ReactNode } from 'react';
+import styles from './ReportSection.module.scss';
 
 type ReportSectionProps = {
-  title: string
-  note: string
-  children: ReactNode
-  className?: string
-}
+  title: string;
+  note: string;
+  children: ReactNode;
+  className?: string;
+};
 
 export const ReportSection = ({ title, note, children, className }: ReportSectionProps) => {
-  const titleId = useId()
+  const titleId = useId();
 
   return (
     <section className={clsx(styles.section, className)} aria-labelledby={titleId}>
@@ -20,5 +20,5 @@ export const ReportSection = ({ title, note, children, className }: ReportSectio
       </div>
       {children}
     </section>
-  )
-}
+  );
+};

@@ -1,40 +1,40 @@
-import { useEffect, useState } from 'react'
-import { loadReport } from '../services/loadReport'
-import type { ReportState } from '../types'
+import { useEffect, useState } from 'react';
+import { loadReport } from '@services/loadReport';
+import type { ReportState } from '@types';
 
 export const useDailyRevenue = () => {
-  const [state, setState] = useState<ReportState>({ status: 'loading' })
-  const [reloadToken, setReloadToken] = useState(0)
+  const [state, setState] = useState<ReportState>({ status: 'loading' });
+  const [reloadToken, setReloadToken] = useState(0);
 
   useEffect(() => {
-    let isActive = true
+    let isActive = true;
 
     const load = async () => {
-      setState({ status: 'loading' })
+      setState({ status: 'loading' });
 
       try {
-        const report = await loadReport()
+        const report = await loadReport();
 
         if (isActive) {
-          setState({ status: 'success', report })
+          setState({ status: 'success', report });
         }
       } catch (error) {
-        console.error(error)
+        console.error(error);
 
         if (isActive) {
-          setState({ status: 'error' })
+          setState({ status: 'error' });
         }
       }
-    }
+    };
 
-    load()
+    load();
 
     return () => {
-      isActive = false
-    }
-  }, [reloadToken])
+      isActive = false;
+    };
+  }, [reloadToken]);
 
-  const handleReload = () => setReloadToken((token) => token + 1)
+  const handleReload = () => setReloadToken((token) => token + 1);
 
-  return { state, handleReload }
-}
+  return { state, handleReload };
+};

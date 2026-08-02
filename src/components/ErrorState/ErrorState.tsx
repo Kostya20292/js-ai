@@ -1,8 +1,8 @@
-import type { AppRoute } from '../../types';
-import { AppNav } from '../AppNav/AppNav';
-import { Button } from '../Button/Button';
-import { Dashboard } from '../Dashboard/Dashboard';
-import { StatusCard } from '../StatusCard/StatusCard';
+import type { AppRoute } from '@types';
+import { AppNav } from '@components/AppNav/AppNav';
+import { Button } from '@components/Button/Button';
+import { Dashboard } from '@components/Dashboard/Dashboard';
+import { StatusCard } from '@components/StatusCard/StatusCard';
 import styles from './ErrorState.module.scss';
 
 type ErrorStateProps = {

@@ -1,13 +1,13 @@
-import clsx from 'clsx'
-import type { ComponentProps, ReactNode } from 'react'
-import styles from './StatusCard.module.scss'
+import clsx from 'clsx';
+import type { ComponentProps, ReactNode } from 'react';
+import styles from './StatusCard.module.scss';
 
 type StatusCardProps = ComponentProps<'section'> & {
-  icon: ReactNode
-  title: string
-  description: string
-  eyebrow?: string
-}
+  icon: ReactNode;
+  title: string;
+  description: string;
+  eyebrow?: string;
+};
 
 export const StatusCard = ({
   icon,
@@ -25,4 +25,4 @@ export const StatusCard = ({
     <p className={styles.description}>{description}</p>
     {children}
   </section>
-)
+);
