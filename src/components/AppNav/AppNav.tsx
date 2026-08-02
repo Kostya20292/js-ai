@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { NAV_ITEMS } from '@config/constants';
 import type { AppRoute } from '@types';
 import styles from './AppNav.module.scss';
 
@@ -6,11 +7,6 @@ type AppNavProps = {
   currentRoute: AppRoute;
   handleNavigate: (route: AppRoute) => void;
 };
-
-const NAV_ITEMS: { route: AppRoute; label: string }[] = [
-  { route: 'report', label: 'Отчёт' },
-  { route: 'sources', label: 'Источники данных' },
-];
 
 export const AppNav = ({ currentRoute, handleNavigate }: AppNavProps) => (
   <nav className={styles.nav} aria-label="Разделы приложения">

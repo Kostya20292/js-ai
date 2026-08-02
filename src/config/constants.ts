@@ -1,4 +1,4 @@
-import type { CurrencyCode } from '@types';
+import type { AppRoute, CurrencyCode, IssueSeverity } from '@types';
 
 export const API_KEY = import.meta.env.VITE_FINANCE_API_KEY;
 
@@ -21,3 +21,20 @@ export const RATE_MIN_FRACTION_DIGITS = 2;
 export const RATE_MAX_FRACTION_DIGITS = 4;
 
 export const LOCALE = 'ru-RU';
+
+export const NAV_ITEMS: { route: AppRoute; label: string }[] = [
+  { route: 'report', label: 'Отчёт' },
+  { route: 'sources', label: 'Источники данных' },
+];
+
+export const ROUTE_TITLES: Record<AppRoute, string> = {
+  report: 'Дневная выручка',
+  sources: 'Источники данных | Дневная выручка',
+};
+
+export const SEVERITY_LABEL: Record<IssueSeverity, string> = {
+  critical: 'Критичная',
+  major: 'Важная',
+  minor: 'Незначительная',
+  info: 'Информация',
+};

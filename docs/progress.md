@@ -2,6 +2,18 @@
 
 Журнал выполненных задач. Новые записи — сверху.
 
+## 2026-08-02 — константы вынесены из компонентов
+
+### Кратко
+
+- `NAV_ITEMS`, `SEVERITY_LABEL`, `ROUTE_TITLES` перенесены в `src/config/constants.ts`
+- из `SourceCard` убрана вспомогательная `severityClassName` — классы через `clsx` в JSX
+- компоненты `AppNav`, `SourceCard`, `App` оставлены без модульных констант и хелперов
+
+### Детали
+
+- `src/config/constants.ts`, `AppNav.tsx`, `SourceCard.tsx`, `App.tsx`
+
 ## 2026-08-02 — Prettier (Airbnb-стиль)
 
 ### Кратко

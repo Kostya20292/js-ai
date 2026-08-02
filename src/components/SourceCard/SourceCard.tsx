@@ -1,29 +1,11 @@
 import clsx from 'clsx';
 import { useId } from 'react';
-import type { DataSource, IssueSeverity } from '@types';
+import { SEVERITY_LABEL } from '@config/constants';
+import type { DataSource } from '@types';
 import styles from './SourceCard.module.scss';
 
 type SourceCardProps = {
   source: DataSource;
-};
-
-const SEVERITY_LABEL: Record<IssueSeverity, string> = {
-  critical: 'Критичная',
-  major: 'Важная',
-  minor: 'Незначительная',
-  info: 'Информация',
-};
-
-const severityClassName = (severity: IssueSeverity): string => {
-  if (severity === 'critical' || severity === 'major') {
-    return styles.severityDanger;
-  }
-
-  if (severity === 'info') {
-    return styles.severityInfo;
-  }
-
-  return styles.severityMinor;
 };
 
 export const SourceCard = ({ source }: SourceCardProps) => {
@@ -77,7 +59,15 @@ export const SourceCard = ({ source }: SourceCardProps) => {
             {source.issues.map((issue) => (
               <li key={`${issue.code}-${issue.title}`} className={styles.issue}>
                 <p className={styles.issueHead}>
-                  <span className={clsx(styles.severity, severityClassName(issue.severity))}>
+                  <span
+                    className={clsx(
+                      styles.severity,
+                      (issue.severity === 'critical' || issue.severity === 'major') &&
+                        styles.severityDanger,
+                      issue.severity === 'info' && styles.severityInfo,
+                      issue.severity === 'minor' && styles.severityMinor,
+                    )}
+                  >
                     {SEVERITY_LABEL[issue.severity]}
                   </span>
                   <span className={styles.issueCode}>{issue.code}</span>
