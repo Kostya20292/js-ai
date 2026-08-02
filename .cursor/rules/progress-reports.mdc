@@ -1,0 +1,36 @@
+---
+description: After each completed task, update docs/progress.md
+alwaysApply: true
+---
+
+# Progress reports
+
+After **each completed task**, append an entry to `docs/progress.md`.
+
+## Rules
+
+- Entry language: Russian
+- Append only — never overwrite existing entries; newest on top (after the file title)
+- Short: 3–5 bullets, no fluff
+- Do not ask permission — update when the task is done
+- Skip incomplete / partial work
+
+## Entry format
+
+```markdown
+## YYYY-MM-DD — краткий заголовок задачи
+
+### Кратко
+
+- что сделано (3–5 пунктов)
+
+### Детали
+
+- затронутые файлы / ключевые изменения
+
+### Следующие шаги
+
+- что логично сделать дальше (если есть; иначе опусти секцию)
+```
+
+Use the current session date. If the day already has entries, add a new section above them (same date).

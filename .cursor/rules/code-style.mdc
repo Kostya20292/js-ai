@@ -1,0 +1,12 @@
+---
+description: TypeScript/React/SCSS style matching this codebase
+globs: src/**/*.{ts,tsx,scss}
+alwaysApply: false
+---
+
+# Code style
+
+Source of truth: [docs/code-style.md](../../docs/code-style.md).
+
+Follow those conventions. Before shipping: `pnpm lint` and `pnpm build`.
+Do not duplicate docs in rules.

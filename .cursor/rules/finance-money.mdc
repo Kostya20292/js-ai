@@ -1,0 +1,12 @@
+---
+description: Money, rates, and conversion invariants (no float math)
+globs: src/utils/amount.ts,src/utils/format.ts,src/api/exchangeRates.ts,src/services/**/*.{ts,tsx},src/types.ts,src/config/constants.ts
+alwaysApply: false
+---
+
+# Finance / money
+
+Source of truth: [docs/finance.md](../../docs/finance.md).
+
+Follow its invariants for amounts, rates, and conversion.
+Do not duplicate docs in rules.

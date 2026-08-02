@@ -1,0 +1,12 @@
+---
+description: HTTP API, finance sources, and exchange rates
+globs: src/api/**/*.{ts,tsx},src/services/**/*.{ts,tsx},src/config/**/*.{ts,tsx},src/hooks/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# API / server
+
+Source of truth: [docs/api.md](../../docs/api.md).
+
+Follow it for requests, keys, sources, and error handling.
+Do not duplicate docs in rules.

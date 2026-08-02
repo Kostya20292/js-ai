@@ -1,0 +1,11 @@
+---
+description: Project layers and responsibility boundaries
+alwaysApply: true
+---
+
+# Architecture
+
+Source of truth: [docs/architecture.md](../../docs/architecture.md).
+
+Read and follow it before changing structure, layers, or boundaries.
+Do not duplicate docs in rules.
